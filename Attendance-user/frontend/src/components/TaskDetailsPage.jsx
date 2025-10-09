@@ -678,7 +678,7 @@ const mapStatusToColumn = (status) => {
       <button
         onClick={addComment}
         disabled={!newComment.trim() || task.verified}
-        className={`w-full mt-2 px-4 py-3 rounded-lg transition-colors ${task.verified ? 'bg-gray-300 text-gray-600 cursor-not-allowed' : 'bg-green-600 text-white hover:bg-green-700'}`}
+        className={`w-full mt-2 px-4 py-3 rounded-lg transition-colors ${task.verified ? 'bg-gray-300 text-gray-600 cursor-not-allowed' : 'bg-blue-600 text-white hover:bg-blue-700'}`}
       >
         Send
       </button>

@@ -304,9 +304,15 @@ const TaskProgress = () => {
         ) {
           return false;
         }
-        if (filters.status !== 'all' && task.status !== filters.status) {
-          return false;
-        }
+         if (filters.status !== 'all') {
+  if (filters.status === 'verified') {
+    // show only verified tasks
+    if (!task.verified) return false;
+  } else {
+    // normal status filter
+    if (task.status !== filters.status) return false;
+  }
+}
         // Fix: Normalize priority to lowercase for comparison
         if (filters.priority !== 'all' && String(task.priority).toLowerCase() !== filters.priority) {
           return false;
@@ -676,6 +682,7 @@ const TaskProgress = () => {
                 <option value="todo">To Do</option>
                 <option value="in-progress">In Progress</option>
                 <option value="completed">Completed</option>
+                <option value="verified">Verified</option>
               </select>
             </div>
             <div>
