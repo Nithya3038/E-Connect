@@ -3340,13 +3340,18 @@ def get_hr_self_assigned_tasks(userid: str, date: str = None):
     return task_list
 
 def get_user_by_position(position):
-    user = Users.find_one({"position": position}, {"_id": 0, "password": 0})
-    if user:
-        # Add userid field for consistency with your frontend expectations
-        user_info = Users.find_one({"position": position})
-        if user_info:
-            user["userid"] = str(user_info["_id"])
-    return user
+    users = Users.find({"position": position}, {"_id": 1, "name": 1, "position": 1})
+    
+    result = []
+    for u in users:
+        result.append({
+            "userid": str(u["_id"]),
+            "name": u.get("name"),
+            "position": u.get("position")
+        })
+    
+    return result
+
 
 def get_team_members(TL):
     team_members = list(Users.find({"TL":TL}, {"_id":0}))
